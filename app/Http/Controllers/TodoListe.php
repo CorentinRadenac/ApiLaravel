@@ -1,30 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Task;
 use Illuminate\Http\Request;
-
-class TaskController extends Controller
+use Illuminate\Support\Facades\DB;
+class TodoControllers extends Controller
 {
-    public function index()
+     public function index()
     {
-        return Task::latest()->get();
+        return json_encode(DB::select('select id,libelle,valider from saisie'));
     }
-
-    public function store(Request $request)
+    public function maxID()
     {
-        $this->validate($request, [
-            'body' => 'required|max:500'
-        ]);
-
-        return Task::create([ 'body' => request('body') ]);
+        return json_encode(DB::select('SELECT MAX(id) AS max FROM saisie'));
     }
-
-    public function destroy($id)
+    public function delete($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
-        return 204;
+    	return json_encode(DB::delete('DELETE FROM saisie WHERE id = ? ',[$id]));
     }
+    public function valider($id,$valider)
+ 	{
+ 		return json_encode(DB::update('UPDATE saisie SET valider = ? WHERE id = ? ', [$valider,$id]));
+ 	}
 }
