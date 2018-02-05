@@ -38,8 +38,8 @@ CREATE TABLE `saisie` (
 
 INSERT INTO `saisie` (`id`, `libelle`, `valider`) VALUES
 (1, 'La premiere saisie', 0),
-(2, 'La seconde', 0),
-(3, 'La derniére qui récapitule', 1);
+(2, 'Ce que je dois faire', 0),
+(3, 'Ce que j&#039;ai fait', 1);
 
 --
 -- Index pour les tables exportées
